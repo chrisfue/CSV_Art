@@ -4,7 +4,7 @@ from kivy.uix.label import Label
 
 class MyApp(App):
     def build(self):
-        return Label(text="CSV_app")
+        return Label(text="CSV_app_test")
     
 if __name__ == "__main__":
     MyApp().run()
