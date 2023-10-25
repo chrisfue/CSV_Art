@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: data
-          ref: dev # Branch name
+          ref: Dev # Branch name
           
       - name: Set up Python
         uses: actions/setup-python@v2
