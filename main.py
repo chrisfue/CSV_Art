@@ -3,8 +3,17 @@ from kivymd.app import MDApp
 from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.floatlayout import FloatLayout
 from kivy.lang import Builder
+from kivy.utils import platform
 from kivy.properties import StringProperty
+from jnius import autoclass
+#from android.permissions import request_permissions, Permission
 import os
+# Define the permission constants
+#Environment = autoclass('android.os.Environment')
+
+
+
+
 
 class LayoutVars(FloatLayout):
                  label_text = StringProperty("tbd")
@@ -41,7 +50,11 @@ class CSV_Art(MDApp):
         
     
     def build(self):
-         return Builder.load_file("app.kv")
+        if 'android' in platform:
+            LayoutVars.label_text = "Running on Android"
+        else:
+                LayoutVars.label_text = "Running on a different platform"
+        return Builder.load_file("app.kv")
 
 
     
