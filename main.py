@@ -11,7 +11,10 @@ import os
 # Define the permission constants
 #Environment = autoclass('android.os.Environment')
 
-
+#from jnius import autoclass, cast
+#PythonActivity = autoclass('org.kivy.android.PythonActivity')
+#Environment = autoclass('android.os.Environment')
+#context = cast('android.content.Context', PythonActivity.mActivity)
 
 
 
@@ -50,6 +53,9 @@ class CSV_Art(MDApp):
         
     
     def build(self):
+
+      
+
         if 'android' in platform:
             LayoutVars.label_text = "Running on Android"
         else:
