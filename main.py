@@ -7,8 +7,15 @@ from kivy.lang import Builder
 from kivy.utils import platform
 from kivy.properties import StringProperty
 from jnius import autoclass
-#from android.permissions import request_permissions, Permission
+
 import os
+
+#handling android specifics
+if platform =="android":
+    from android.permissions import request_permissions, Permission
+    request_permissions([Permission.WRITE_EXTERNAL_STORAGE])
+    from android.storage import primary_external_storage_path
+    primary_ext_storage = primary_external_storage_path()
 # Define the permission constants
 #Environment = autoclass('android.os.Environment')
 
@@ -42,13 +49,16 @@ class CSV_Art(MDApp):
 
     def open_filemanager(self):
         print("button pressed")
-        self.root.ids.selected_file.text = "test successful"
-        #self.fileManager.show(self.path) commented for testing only
+        if platform =="android":
+              self.fileManager.show(primary_ext_storage)
+              print(f"{primary_ext_storage}")
+        else:
+              self.fileManager.show(self.path)
         
 
     def select_path(self,path: str):
         self.close_fileManager()
-        #self.root.ids.selected_file.text = f"{path}" commented for testing
+        self.root.ids.selected_file.text = f"{path}"
         
 
     def close_fileManager(self,*args):
