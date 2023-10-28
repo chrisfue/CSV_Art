@@ -2,6 +2,7 @@
 from kivymd.app import MDApp
 from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.floatlayout import FloatLayout
+#from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.utils import platform
 from kivy.properties import StringProperty
@@ -40,6 +41,7 @@ class CSV_Art(MDApp):
         )
 
     def open_filemanager(self):
+        print("button pressed")
         self.fileManager.show(self.path)
         
 
