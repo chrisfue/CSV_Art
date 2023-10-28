@@ -42,12 +42,13 @@ class CSV_Art(MDApp):
 
     def open_filemanager(self):
         print("button pressed")
-        self.fileManager.show(self.path)
+        self.root.ids.selected_file.text = "test successful"
+        #self.fileManager.show(self.path) commented for testing only
         
 
     def select_path(self,path: str):
         self.close_fileManager()
-        self.root.ids.selected_file.text = f"{path}"
+        #self.root.ids.selected_file.text = f"{path}" commented for testing
         
 
     def close_fileManager(self,*args):
