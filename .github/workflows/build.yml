@@ -31,6 +31,13 @@ jobs:
           workdir: .
           buildozer_version: stable
 
+      - name: Install Gettext
+        run: sudo apt-get install gettext
+          # You can customize this command based on your runner's OS and package manager.
+  
+      - name: Install autopoint (if necessary)
+        run: sudo apt-get install autopoint
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
