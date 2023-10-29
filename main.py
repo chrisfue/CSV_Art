@@ -31,9 +31,13 @@ class LayoutVars(FloatLayout):
 
 class CSV_Art(MDApp):
     def build(self):
+        #Variable for data to be displayed:
+        self.data = None
+        
+        
         screen_managing = ScreenManager()
         screen_managing.add_widget(FileManager(name='fileManagement'))
-       # screen_managing.add_widget(DataViewScreen(name='dataView'))
+        screen_managing.add_widget(DataViewScreen(name='dataView'))
       
 
         if 'android' in platform:

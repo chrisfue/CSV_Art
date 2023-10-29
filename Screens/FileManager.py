@@ -1,6 +1,8 @@
 from kivy.uix.screenmanager import Screen
 from kivy.utils import platform
 from kivymd.uix.filemanager import MDFileManager
+from kivy.app import App
+import pandas as pd
 import os 
 
 if platform =="android":
@@ -8,7 +10,8 @@ if platform =="android":
         primary_ext_storage = primary_external_storage_path()
 
 class FileManager(Screen):
-
+    
+    
     
 
 
@@ -38,3 +41,12 @@ class FileManager(Screen):
 
     def close_fileManager(self,*args):
         self.fileManager.close()
+    
+    def open_datafile(self,filePath):
+         app_instance = App.get_running_app()
+         
+         try:
+              app_instance.data = pd.read_csv(filePath)
+         except IOError as e:
+              print(e)
+              

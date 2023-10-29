@@ -1,5 +1,6 @@
 ScreenManager:
     FileManager:
+    DataViewScreen:
 
 
 <FileManager>
@@ -11,13 +12,28 @@ ScreenManager:
         MDRaisedButton:
             text: "Select file"
             size_hint: .2, .1
-            pos_hint: {'center_x': 0.5,'center_y': 0.2}
+            pos_hint: {'center_x': 0.5,'center_y': 0.3}
             on_release: 
                 root.open_filemanager()
-
+        MDRaisedButton:
+            text: "Open file"
+            size_hint: .2, .1
+            pos_hint: {'center_x': 0.5,'center_y': 0.15}
+            on_release:
+                root.open_datafile(selected_file.text)
+                root.manager.current='dataView'
 
         Label:
             id: selected_file
             text: "tbd"
             color: "orange"
+
+<DataViewScreen>
+    id:'dataList'
+    name:'dataView'
+    on_enter: 
+        root.load_data_table()
+    
+    
+
 
