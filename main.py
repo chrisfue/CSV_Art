@@ -2,38 +2,48 @@
 from kivymd.app import MDApp
 from kivymd.uix.filemanager import MDFileManager
 from kivymd.uix.floatlayout import FloatLayout
-#from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen,ScreenManager
 from kivy.lang import Builder
 from kivy.utils import platform
 from kivy.properties import StringProperty
 from jnius import autoclass
 
+#import self-written classes:
+from Screens.DataListView import DataViewScreen
+from Screens.FileManager import FileManager
+
 import os
 
-#handling android specifics
+#handling android specific permissions to access files
 if platform =="android":
     from android.permissions import request_permissions, Permission
     request_permissions([Permission.WRITE_EXTERNAL_STORAGE])
     from android.storage import primary_external_storage_path
     primary_ext_storage = primary_external_storage_path()
-# Define the permission constants
-#Environment = autoclass('android.os.Environment')
-
-#from jnius import autoclass, cast
-#PythonActivity = autoclass('org.kivy.android.PythonActivity')
-#Environment = autoclass('android.os.Environment')
-#context = cast('android.content.Context', PythonActivity.mActivity)
 
 
 
+ 
 class LayoutVars(FloatLayout):
                  label_text = StringProperty("tbd")
+
     
 
 class CSV_Art(MDApp):
+    def build(self):
+        screen_managing = ScreenManager()
+        screen_managing.add_widget(FileManager(name='fileManagement'))
+       # screen_managing.add_widget(DataViewScreen(name='dataView'))
+      
 
+        if 'android' in platform:
+            LayoutVars.label_text = "Running on Android"
+        else:
+                LayoutVars.label_text = "Running on a different platform"
+        return Builder.load_file("app.kv")
+"""
     fileManager = None
-    #label_text = StringProperty("to be defined")
+    
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -63,17 +73,9 @@ class CSV_Art(MDApp):
 
     def close_fileManager(self,*args):
         self.fileManager.close()
-        
-    
-    def build(self):
 
-      
+"""
 
-        if 'android' in platform:
-            LayoutVars.label_text = "Running on Android"
-        else:
-                LayoutVars.label_text = "Running on a different platform"
-        return Builder.load_file("app.kv")
 
 
     

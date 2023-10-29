@@ -1,18 +1,23 @@
-LayoutVars:
-    size_hint: 1, 1
+ScreenManager:
+    FileManager:
 
-    MDRaisedButton:
-        text: "Select file"
-        size_hint: .2, .1
-        pos_hint: {'center_x': 0.5,'center_y': 0.2}
-        on_release: 
-            app.open_filemanager()
-             
 
-                    
+<FileManager>
+    id: 'fileManager'
+    name: 'fileManagement'
+    LayoutVars:
+        size_hint: 1, 1
 
-    Label:
-        id: selected_file
-        text: root.label_text
-        color: "orange"
-        
+        MDRaisedButton:
+            text: "Select file"
+            size_hint: .2, .1
+            pos_hint: {'center_x': 0.5,'center_y': 0.2}
+            on_release: 
+                root.open_filemanager()
+
+
+        Label:
+            id: selected_file
+            text: "tbd"
+            color: "orange"
+
