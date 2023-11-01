@@ -35,6 +35,9 @@ jobs:
       - name: try install autoconf
         run: sudo apt install --no-install-recommends autoconf automake
 
+      - name: Update PATH
+        run: echo "::add-path::/usr/bin/autopoint"
+      
 #      - name: Build with Buildozer
 #        uses: ArtemSBulgakov/buildozer-action@v1
 #        id: buildozer
