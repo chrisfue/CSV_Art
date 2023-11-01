@@ -23,16 +23,13 @@ jobs:
         with:
           path: master
       
-      
-      - name: Install Gettext
-        run: sudo apt-get install gettext
-            # You can customize this command based on your runner's OS and package manager.
-    
+      - name: Install Gettext and autopoint
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y gettext autopoint      
+   
       - name: try install autoconf
         run: sudo apt install --no-install-recommends autoconf automake
-
-      - name: Install autopoint (if necessary)
-        run: sudo apt-get install autopoint          
 
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
