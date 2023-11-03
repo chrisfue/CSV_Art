@@ -36,7 +36,8 @@ jobs:
         run: sudo apt install --no-install-recommends autoconf automake
 
       - name: Update PATH
-        run: echo "::add-path::/usr/bin/autopoint"
+        run: echo "{/usr/bin/autopoint"}" >> $GITHUB_PATH
+        
       
 #      - name: Build with Buildozer
 #        uses: ArtemSBulgakov/buildozer-action@v1
