@@ -26,7 +26,7 @@ jobs:
       - name: Install Gettext and autopoint
         run: |
             sudo apt-get update
-            sudo apt-get install -y gettext-devel                   
+            sudo apt-get install -y gettext-devel                    
 #      - name: try install autoconf
 #        run: sudo apt install --no-install-recommends autoconf automake
 
