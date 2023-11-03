@@ -26,17 +26,15 @@ jobs:
       - name: Install Gettext and autopoint
         run: |
             sudo apt-get update
-            sudo apt-get install -y gettext autopoint   
-            
-      - name: Verify autopoint installation
-        run: which autopoint
-          
-   
-      - name: try install autoconf
-        run: sudo apt install --no-install-recommends autoconf automake
+            sudo apt-get install -y gettext                            
+#      - name: try install autoconf
+#        run: sudo apt install --no-install-recommends autoconf automake
 
       - name: Update PATH
         run: echo "/usr/bin/autopoint" >> $GITHUB_PATH
+
+      - name: Verify autopoint installation
+        run: which autopoint
         
       
       - name: Build with Buildozer
