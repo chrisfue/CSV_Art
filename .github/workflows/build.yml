@@ -38,7 +38,7 @@ jobs:
         
       
       - name: Build with Buildozer
-        uses: chrisfue/buildozer-action
+        uses: chrisfue/buildozer-action@master
         id: buildozer
         with:
           repository_root: master
