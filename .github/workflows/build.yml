@@ -33,8 +33,8 @@ jobs:
       - name: Update PATH
         run: echo "/usr/bin/autopoint" >> $GITHUB_PATH
 
-      - name: Verify autopoint installation
-        run: which autopoint
+      - name: Set autopoint env
+        run: export AUTOPOINT=/usr/bin/autopoint
         
       
       - name: Build with Buildozer
