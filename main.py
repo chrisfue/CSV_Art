@@ -17,7 +17,7 @@ import os
 #handling android specific permissions to access files
 if platform =="android":
     from android.permissions import request_permissions, Permission
-    request_permissions([Permission.WRITE_EXTERNAL_STORAGE])
+    request_permissions([Permission.WRITE_EXTERNAL_STORAGE,Permission.MANAGE_EXTERNAL_STORAGE])
     from android.storage import primary_external_storage_path
     primary_ext_storage = primary_external_storage_path()
 
