@@ -1,43 +1,64 @@
-name: CI
+name: Build
 on:
   push:
-    branches: [ main ]
-              [dev]
+    branches-ignore:
+      - data
+      - gh-pages
+    tags:
+      - '**'
+  pull_request:
+    branches-ignore:
+      - data
+      - gh-pages
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # Build job. Builds app for Android with Buildozer
+  build-android:
+    name: Build for Android
+    runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v2
-
-      # used to cache dependencies with a timeout
-      - name: Get Date
-        id: get-date
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: master
+      
+      - name: Install Gettext and autopoint
         run: |
-          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-        shell: bash
+            sudo apt-get update
+            sudo apt-get install -y gettext                    
+#      - name: try install autoconf
+#        run: sudo apt install --no-install-recommends autoconf automake
 
-      - name: Cache Buildozer global directory
-        uses: actions/cache@v2
-        with:
-          path: .buildozer_global
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
+#      - name: Update PATH
+#        run: echo "/usr/bin/autopoint" >> $GITHUB_PATH
 
-      - uses: actions/cache@v2
-        with:
-          path: .buildozer
-          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
-
+#      - name: Set autopoint env
+#        run: export AUTOPOINT=/usr/bin/autopoint
+        
+      
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+        uses: chrisfue/buildozer-action@master
         id: buildozer
         with:
-          command: buildozer android debug
-          buildozer_version: master
+          repository_root: master
+          workdir: .
+          buildozer_version: stable
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: DevMD
+          ref: DevMD # Branch name
+          
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+          architecture: x64
