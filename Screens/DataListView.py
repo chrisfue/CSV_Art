@@ -27,7 +27,8 @@ class DataViewScreen(Screen):
           self.dataTable = MDDataTable(
                column_data= columnData,
                row_data= rowData,
-               rows_num= len(rowData)               
+               rows_num= 10,
+               use_pagination=True               
           )
           self.add_widget(self.dataTable)
           print("added") #remove after testing
